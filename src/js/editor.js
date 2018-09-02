@@ -2,7 +2,6 @@
  * @fileoverview Implemtents Editor
  * @author NHN Ent. FE Development Lab <dl_javascript@nhnent.com>
  */
-import $ from 'jquery';
 import util from 'tui-code-snippet';
 
 import Button from './ui/button';
@@ -123,7 +122,7 @@ class ToastUIEditor {
         * @param {boolean} [options.hideModeSwitch=false] - hide mode switch tab bar
     */
   constructor(options) {
-    this.options = $.extend({
+    this.options = this.extend({
       previewStyle: 'tab',
       initialEditType: 'markdown',
       height: '300px',
@@ -213,6 +212,15 @@ class ToastUIEditor {
     if (this.options.usageStatistics) {
       sendHostName();
     }
+  }
+  extend(a, b) {
+    for (let key in b) {
+      if (b.hasOwnProperty(key)) {
+        a[key] = b[key];
+      }
+    }
+
+    return a;
   }
 
   /**
@@ -508,10 +516,10 @@ class ToastUIEditor {
   height(height) {
     if (util.isExisty(height)) {
       if (height === 'auto') {
-        $(this.options.el).addClass('auto-height');
+        this.options.el.classList.add('auto-height');
         this.minHeight(this.minHeight());
       } else {
-        $(this.options.el).removeClass('auto-height');
+        this.options.el.classList.remove('auto-height');
         this.minHeight(height);
       }
       if (util.isNumber(height)) {

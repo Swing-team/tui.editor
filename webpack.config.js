@@ -17,10 +17,7 @@ const ENTRY_MAIN = './src/js/index.js';
 const ENTRY_VIEWER = './src/js/indexViewer.js';
 const ENTRY_MAIN_ALL = './src/js/indexAll.js';
 const ENTRY_VIEWER_ALL = './src/js/indexViewerAll.js';
-const ENTRY_EXT_CHART = './src/js/extensions/chart/chart.js';
-const ENTRY_EXT_UML = './src/js/extensions/uml.js';
-const ENTRY_EXT_COLOR_SYNTAX = './src/js/extensions/colorSyntax.js';
-const ENTRY_EXT_SCROLL_SYNC = './src/js/extensions/scrollSync/scrollSync.js';
+const ENTRY_EXT_COLOR_SYNTAX = './src/js/extensions/colorSyntax.js'; 
 const ENTRY_EXT_TABLE = './src/js/extensions/table/table.js';
 const ENTRY_EDITOR_CSS = './src/css/tui-editor.css';
 const ENTRY_CONTENT_CSS = './src/css/tui-editor-contents.css';
@@ -105,12 +102,6 @@ const defaultConfigs = Array(isDevServer ? 1 : 4).fill(0).map(() => {
         commonjs2: 'tui-chart',
         amd: 'tui-chart',
         root: ['tui', 'chart']
-      },
-      'plantuml-encoder': {
-        commonjs: 'plantuml-encoder',
-        commonjs2: 'plantuml-encoder',
-        amd: 'plantuml-encoder',
-        root: ['plantumlEncoder']
       },
       'highlight.js': {
         commonjs: 'highlight.js',
@@ -211,46 +202,6 @@ if (isDevServer) {
     defaultConfigs[1].plugins.push(new BundleAnalyzerPlugin({
       analyzerMode: 'static',
       reportFilename: `${ANALYZER_DIR}/stats-${pkg.version}-viewer-all.html`
-    }));
-  }
-
-  // BuildExt
-  defaultConfigs[2].entry = {
-    'extChart': ENTRY_EXT_CHART,
-    'extUML': ENTRY_EXT_UML,
-    'extColorSyntax': ENTRY_EXT_COLOR_SYNTAX,
-    'extScrollSync': ENTRY_EXT_SCROLL_SYNC,
-    'extTable': ENTRY_EXT_TABLE
-  };
-  defaultConfigs[2].output.libraryTarget = 'umd';
-  defaultConfigs[2].externals.push(function(context, request, callback) {
-    const dir = path.relative(__dirname, context);
-    if (dir.includes('extensions')) {
-      if (request.match(/editor$/)) {
-        callback(null, {
-          commonjs: 'tui-editor',
-          commonjs2: 'tui-editor',
-          amd: 'tui-editor',
-          root: NAME_SPACE
-        });
-      } else if (request.match(/viewer$/)) {
-        callback(null, {
-          commonjs: 'tui-editor/dist/tui-editor-Viewer',
-          commonjs2: 'tui-editor/dist/tui-editor-Viewer',
-          amd: 'tui-editor/dist/tui-editor-Viewer',
-          root: NAME_SPACE
-        });
-      } else {
-        callback();
-      }
-    } else {
-      callback();
-    }
-  });
-  if (isProduction) {
-    defaultConfigs[2].plugins.push(new BundleAnalyzerPlugin({
-      analyzerMode: 'static',
-      reportFilename: `${ANALYZER_DIR}/stats-${pkg.version}-exts.html`
     }));
   }
 
