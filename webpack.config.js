@@ -17,8 +17,7 @@ const ENTRY_MAIN = './src/js/index.js';
 const ENTRY_VIEWER = './src/js/indexViewer.js';
 const ENTRY_MAIN_ALL = './src/js/indexAll.js';
 const ENTRY_VIEWER_ALL = './src/js/indexViewerAll.js';
-const ENTRY_EXT_COLOR_SYNTAX = './src/js/extensions/colorSyntax.js'; 
-const ENTRY_EXT_TABLE = './src/js/extensions/table/table.js';
+const ENTRY_EXT_COLOR_SYNTAX = './src/js/extensions/colorSyntax.js';
 const ENTRY_EDITOR_CSS = './src/css/tui-editor.css';
 const ENTRY_CONTENT_CSS = './src/css/tui-editor-contents.css';
 const ENTRY_IMAGE_DIR = './src/image';
@@ -61,14 +60,14 @@ const defaultConfigs = Array(isDevServer ? 1 : 4).fill(0).map(() => {
           failOnError: false
         }
       },
-      {
-        test: /\.js$/,
-        exclude: /node_modules|lib|dist/,
-        loader: 'babel-loader?cacheDirectory',
-        options: {
-          babelrc: true
-        }
-      }]
+        {
+          test: /\.js$/,
+          exclude: /node_modules|lib|dist/,
+          loader: 'babel-loader?cacheDirectory',
+          options: {
+            babelrc: true
+          }
+        }]
     },
     plugins: [
       new webpack.BannerPlugin({
@@ -97,11 +96,11 @@ const defaultConfigs = Array(isDevServer ? 1 : 4).fill(0).map(() => {
         amd: 'tui-code-snippet',
         root: ['tui', 'util']
       },
-      'tui-chart': {
-        commonjs: 'tui-chart',
-        commonjs2: 'tui-chart',
-        amd: 'tui-chart',
-        root: ['tui', 'chart']
+      'plantuml-encoder': {
+        commonjs: 'plantuml-encoder',
+        commonjs2: 'plantuml-encoder',
+        amd: 'plantuml-encoder',
+        root: ['plantumlEncoder']
       },
       'highlight.js': {
         commonjs: 'highlight.js',
